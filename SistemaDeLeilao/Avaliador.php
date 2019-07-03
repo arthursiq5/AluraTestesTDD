@@ -4,12 +4,21 @@
       * @access private
       * @var float $maiorValor
       */
-    private $maiorValor = (-INF);
+    private $maiorValor;
     /**
       * @access private
       * @var float $maiorValor
       */
-    private $menorValor = INF;
+    private $menorValor;
+
+    /**
+      * @access public
+      * @return void
+      */
+    function __construct(){
+      $this->maiorValor = (-INF);
+      $this->menorValor = INF;
+    }
 
     /**
       * avalia leilão
