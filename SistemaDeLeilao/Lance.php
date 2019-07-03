@@ -1,4 +1,5 @@
 <?php
+  require_once 'Usuario.php';
   class Lance{
     /**
       * @var \Usuario $usuario
