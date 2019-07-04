@@ -71,20 +71,9 @@
       $leiloeiro = new Avaliador();
       $leiloeiro->avalia($leilao);
 
-      /**
-        * função: verifica se valores são iguais
-        * primeiro parâmetro: valor esperado
-        * segundo  parâmetro: valor analisado
-        */
       $this->assertEquals($maiorEsperado, $leiloeiro->getMaiorLance(), 1);
 
-      echo "<br/>";
 
-      /**
-        * função: verifica se valores são iguais
-        * primeiro parâmetro: valor esperado
-        * segundo  parâmetro: valor analisado
-        */
       $this->assertEquals($menorEsperado, $leiloeiro->getMenorLance());
     }
 
@@ -155,6 +144,67 @@
         ->getMaioresValores()[2]
         ->getValor()
       );
+    }
+
+    public function testPegaMaioresDeCinco(){
+      $leilao = new Leilao('PlayStation 4');
+
+      $caio   = new Usuario('Caio');
+      $felipe = new Usuario('Felipe');
+
+      $leilao->propoe(new Lance($felipe, 200));
+      $leilao->propoe(new Lance($caio,   350));
+      $leilao->propoe(new Lance($felipe, 400));
+      $leilao->propoe(new Lance($caio,   500));
+      $leilao->propoe(new Lance($felipe, 600));
+      $leilao->propoe(new Lance($caio,   700));
+
+      $leiloeiro = new Avaliador();
+      $leiloeiro->avalia($leilao);
+
+      $this->assertEquals(3, count($leiloeiro->getMaioresValores()));
+      $this->assertEquals(700, $leiloeiro
+        ->getMaioresValores()[0]
+        ->getValor()
+      );
+      $this->assertEquals(600, $leiloeiro
+        ->getMaioresValores()[1]
+        ->getValor()
+      );
+      $this->assertEquals(500, $leiloeiro
+        ->getMaioresValores()[2]
+        ->getValor()
+      );
+    }
+    public function testPegaDoisUnicos(){
+      $leilao = new Leilao('PlayStation 4');
+
+      $caio   = new Usuario('Caio');
+      $felipe = new Usuario('Felipe');
+
+      $leilao->propoe(new Lance($felipe, 200));
+      $leilao->propoe(new Lance($caio,   350));
+
+      $leiloeiro = new Avaliador();
+      $leiloeiro->avalia($leilao);
+
+      $this->assertEquals(2, count($leiloeiro->getMaioresValores()));
+      $this->assertEquals(350, $leiloeiro
+        ->getMaioresValores()[0]
+        ->getValor()
+      );
+      $this->assertEquals(200, $leiloeiro
+        ->getMaioresValores()[1]
+        ->getValor()
+      );
+    }
+    public function testPegaNulos(){
+      $leilao = new Leilao('PlayStation 4');
+
+      $leiloeiro = new Avaliador();
+      $leiloeiro->avalia($leilao);
+
+      $this->assertEquals(null, count($leiloeiro->getMaioresValores()));
     }
   }
  ?>
