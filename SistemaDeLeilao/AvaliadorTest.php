@@ -4,8 +4,13 @@
   require_once 'Leilao.php';
   require_once 'Avaliador.php';
   use PHPUnit\Framework\TestCase;
-
+  /**
+    * teste automatizado baseado no PHPUnit
+    */
   class AvaliadorTest extends TestCase{
+    /**
+      * teste automatizado utilizando phpunit
+      */
     public function testAceitaLancesOrdemDecrescente(){
       $maiorEsperado = 400;
       $menorEsperado = 250;
@@ -32,6 +37,11 @@
 
       echo "<br/>";
 
+      /**
+        * função: verifica se valores são iguais
+        * primeiro parâmetro: valor esperado
+        * segundo  parâmetro: valor analisado
+        */
       $this->assertEquals($menorEsperado, $leiloeiro->getMenorLance());
     }
   }
