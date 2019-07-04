@@ -60,7 +60,11 @@
       foreach($leilao->getLances() as $lance){
         $valorTotal += $lance->getValor();
       }
-      $this->mediaDosValores = (float) number_format(($valorTotal / \sizeof($leilao->getLances())), 2);
+      if (sizeof($leilao->getLances()) > 0) {
+        $this->mediaDosValores = (float) number_format(($valorTotal / \sizeof($leilao->getLances())), 2);
+      }else{
+        $this->mediaDosValores = null;
+      }
     }
 
     /**
