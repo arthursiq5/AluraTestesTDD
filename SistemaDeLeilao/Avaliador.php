@@ -17,6 +17,12 @@
       */
     private $mediaDosValores;
 
+    /**
+      * @access private
+      * @var array $maiores
+      */
+    private $maiores;
+
 
     /**
       * @access public
@@ -36,10 +42,11 @@
       foreach($leilao->getLances() as $lance){
         if($lance->getValor() > $this->maiorValor)
           $this->maiorValor = $lance->getValor();
-        if($lance->getValor < $this->menorValor)
+        if($lance->getValor() < $this->menorValor)
           $this->menorValor = $lance->getValor();
       }
       $this->calculaMedia($leilao);
+      $this->pegaMaioresValoresDo($leilao);
     }
 
     /**
@@ -78,6 +85,30 @@
       */
     public function getMedia():float{
       return $this->mediaDosValores;
+    }
+
+    /**
+      * @access private
+      * @param Leilao $leilao
+      * @return void
+      */
+    private function pegaMaioresValoresDo(Leilao $leilao):void{
+      $lances = $leilao->getLances();
+
+      usort($lances, function($a, $b){
+        if($a->getValor() == $b->getValor()) return 0;
+        return ($a->getValor() < $b->getValor()) ? (1) : (-1);
+      });
+
+      $this->maiores = array_slice($lances, 0, 3);
+    }
+
+    /**
+      * @access public
+      * @return array
+      */
+    public function getMaioresValores():array{
+      return $this->maiores;
     }
   }
  ?>
