@@ -1,9 +1,15 @@
 <?php
-  require_once 'Usuario.php';
-  require_once 'Lance.php';
-  require_once 'Leilao.php';
-  require_once 'Avaliador.php';
+  // require_once "../autoload.";
+
   use PHPUnit\Framework\TestCase;
+  require_once "Usuario.php";
+  require_once "Lance.php";
+  require_once "Leilao.php";
+  require_once "Avaliador.php";
+  // require_once "./Usuario.php";
+  // require_once "./Lance.php";
+  // require_once "./Leilao.php";
+  // require_once "./Avaliador.php";
   /**
     * teste automatizado baseado no PHPUnit
     */
