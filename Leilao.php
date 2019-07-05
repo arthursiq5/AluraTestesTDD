@@ -28,10 +28,27 @@
       * @return Leilao
       */
     public function propoe(Lance $lance):Leilao{
-      if ((\count($this->getLances()) == 0) ||
-          (end($this->lances)->getUsuario() != $lance->getUsuario()))
+      if ($this->validaProposta($lance))
         $this->lances[] = $lance;
       return $this;
+    }
+
+    /**
+      * @access private
+      * @param Lance $lance
+      * @return bool
+      */
+    private function validaProposta(Lance $lance):bool{
+      return (\count($this->getLances()) == 0) ||
+             ($this->getUltimoUsuario() != $lance->getUsuario());
+    }
+
+    /**
+      * @access private
+      * @return Usuario $ultimoUsuario
+      */
+    private function getUltimoUsuario():Usuario{
+      return end($this->lances)->getUsuario();
     }
 
     /**
