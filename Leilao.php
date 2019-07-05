@@ -25,10 +25,11 @@
     /**
       * @access public
       * @param Lance $lance
-      * @return void
+      * @return Leilao
       */
-    public function propoe(Lance $lance){
+    public function propoe(Lance $lance):Leilao{
       $this->lances[] = $lance;
+      return $this;
     }
 
     /**

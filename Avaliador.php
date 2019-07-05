@@ -36,9 +36,9 @@
     /**
       * avalia leilão
       * @param Leilao $leilao
-      * @return void
+      * @return Avaliador $this
       */
-    public function avalia(Leilao $leilao):void{
+    public function avalia(Leilao $leilao):Avaliador{
       foreach($leilao->getLances() as $lance){
         if($lance->getValor() > $this->maiorValor)
           $this->maiorValor = $lance->getValor();
@@ -47,6 +47,7 @@
       }
       $this->calculaMedia($leilao);
       $this->pegaMaioresValoresDo($leilao);
+      return $this;
     }
 
     /**

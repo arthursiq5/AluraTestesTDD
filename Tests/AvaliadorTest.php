@@ -22,10 +22,10 @@
       $caio   = new Usuario('Caio');
       $felipe = new Usuario('Felipe');
 
-      $leilao->propoe(new Lance($renan,  400));
-      $leilao->propoe(new Lance($caio,   300));
-      $leilao->propoe(new Lance($felipe, 200));
-      $leilao->propoe(new Lance($renan,  100));
+      $leilao->propoe(new Lance($renan,  400))
+             ->propoe(new Lance($caio,   300))
+             ->propoe(new Lance($felipe, 200))
+             ->propoe(new Lance($renan,  100));
 
       $leiloeiro = new Avaliador();
       $leiloeiro->avalia($leilao);
@@ -43,9 +43,9 @@
       $caio   = new Usuario('Caio');
       $felipe = new Usuario('Felipe');
 
-      $leilao->propoe(new Lance($renan,  400));
-      $leilao->propoe(new Lance($caio,   350));
-      $leilao->propoe(new Lance($felipe, 250));
+      $leilao->propoe(new Lance($renan,  400))
+             ->propoe(new Lance($caio,   350))
+             ->propoe(new Lance($felipe, 250));
 
       $leiloeiro = new Avaliador();
       $leiloeiro->avalia($leilao);
@@ -64,9 +64,9 @@
       $caio   = new Usuario('Caio');
       $felipe = new Usuario('Felipe');
 
-      $leilao->propoe(new Lance($felipe, 250));
-      $leilao->propoe(new Lance($caio,   350));
-      $leilao->propoe(new Lance($renan,  400));
+      $leilao->propoe(new Lance($felipe, 250))
+             ->propoe(new Lance($caio,   350))
+             ->propoe(new Lance($renan,  400));
 
       $leiloeiro = new Avaliador();
       $leiloeiro->avalia($leilao);
@@ -87,11 +87,11 @@
       $caio   = new Usuario('Caio');
       $felipe = new Usuario('Felipe');
 
-      $leilao->propoe(new Lance($caio,   350));
-      $leilao->propoe(new Lance($felipe, 250));
-      $leilao->propoe(new Lance($caio,   122));
-      $leilao->propoe(new Lance($renan,  400));
-      $leilao->propoe(new Lance($felipe, 350));
+      $leilao->propoe(new Lance($caio,   350))
+             ->propoe(new Lance($felipe, 250))
+             ->propoe(new Lance($caio,   122))
+             ->propoe(new Lance($renan,  400))
+             ->propoe(new Lance($felipe, 350));
 
 
       $leiloeiro = new Avaliador();
@@ -123,10 +123,10 @@
       $caio   = new Usuario('Caio');
       $felipe = new Usuario('Felipe');
 
-      $leilao->propoe(new Lance($felipe, 200));
-      $leilao->propoe(new Lance($caio,   350));
-      $leilao->propoe(new Lance($felipe, 400));
-      $leilao->propoe(new Lance($caio,   500));
+      $leilao->propoe(new Lance($felipe, 200))
+             ->propoe(new Lance($caio,   350))
+             ->propoe(new Lance($felipe, 400))
+             ->propoe(new Lance($caio,   500));
 
       $leiloeiro = new Avaliador();
       $leiloeiro->avalia($leilao);
@@ -152,21 +152,21 @@
       $caio   = new Usuario('Caio');
       $felipe = new Usuario('Felipe');
 
-      $leilao->propoe(new Lance($felipe, 200));
-      $leilao->propoe(new Lance($caio,   350));
-      $leilao->propoe(new Lance($felipe, 400));
-      $leilao->propoe(new Lance($caio,   500));
-      $leilao->propoe(new Lance($felipe, 600));
-      $leilao->propoe(new Lance($caio,   700));
+      $leilao->propoe(new Lance($felipe, 200))
+             ->propoe(new Lance($caio,   350))
+             ->propoe(new Lance($felipe, 400))
+             ->propoe(new Lance($caio,   500))
+             ->propoe(new Lance($felipe, 600))
+             ->propoe(new Lance($caio,   700));
 
       $leiloeiro = new Avaliador();
       $leiloeiro->avalia($leilao);
 
       $this->assertEquals(3, count($leiloeiro->getMaioresValores()));
       $this->assertEquals(700, $leiloeiro
-        ->getMaioresValores()[0]
-        ->getValor()
-      );
+             ->getMaioresValores()[0]
+             ->getValor()
+        );
       $this->assertEquals(600, $leiloeiro
         ->getMaioresValores()[1]
         ->getValor()
@@ -182,8 +182,8 @@
       $caio   = new Usuario('Caio');
       $felipe = new Usuario('Felipe');
 
-      $leilao->propoe(new Lance($felipe, 200));
-      $leilao->propoe(new Lance($caio,   350));
+      $leilao->propoe(new Lance($felipe, 200))
+             ->propoe(new Lance($caio,   350));
 
       $leiloeiro = new Avaliador();
       $leiloeiro->avalia($leilao);
@@ -205,6 +205,8 @@
       $leiloeiro->avalia($leilao);
 
       $this->assertEquals(null, count($leiloeiro->getMaioresValores()));
+
+
     }
   }
  ?>
