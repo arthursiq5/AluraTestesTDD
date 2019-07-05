@@ -36,11 +36,39 @@
     /**
       * @access private
       * @param Lance $lance
-      * @return bool
+      * @return boolean
       */
     private function validaProposta(Lance $lance):bool{
       return (\count($this->getLances()) == 0) ||
-             ($this->getUltimoUsuario() != $lance->getUsuario());
+             $this->verificaLancesSequenciaisUsuario($lance) &&
+             $this->validaQuantiaDeLancesUsuario($lance);
+    }
+
+    /**
+      * verifica se usuário deu dois lances seguidos
+      * @access private
+      * @param Lance $lance
+      * @return boolean
+      */
+    private function verificaLancesSequenciaisUsuario(Lance $lance):bool{
+      return $this->getUltimoUsuario() != $lance->getUsuario();
+    }
+
+    /**
+      * retorna verdadeiro apenas se o usuário tiver dado menos de 5 lances
+      * @access private
+      * @param Lance $lance
+      * @return boolean
+      */
+    private function validaQuantiaDeLancesUsuario(Lance $lance):bool{
+      /** @var int $totalLances */
+      $totalLances = 0;
+
+      foreach ($this->lances as $lanceAtual) {
+        if($lanceAtual->getUsuario() == $lance->getUsuario())
+          $totalLances++;
+      }
+      return $totalLances < 5;
     }
 
     /**
