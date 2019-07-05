@@ -40,8 +40,8 @@
       */
     private function validaProposta(Lance $lance):bool{
       return (\count($this->getLances()) == 0) ||
-             $this->verificaLancesSequenciaisUsuario($lance) &&
-             $this->validaQuantiaDeLancesUsuario($lance);
+             $this->verificaLancesSequenciaisUsuario($lance->getUsuario()) &&
+             $this->validaQuantiaDeLancesUsuario($lance->getUsuario());
     }
 
     /**
@@ -50,8 +50,8 @@
       * @param Lance $lance
       * @return boolean
       */
-    private function verificaLancesSequenciaisUsuario(Lance $lance):bool{
-      return $this->getUltimoUsuario() != $lance->getUsuario();
+    private function verificaLancesSequenciaisUsuario(Usuario $usuario):bool{
+      return $this->getUltimoUsuario() != $usuario;
     }
 
     /**
@@ -60,12 +60,12 @@
       * @param Lance $lance
       * @return boolean
       */
-    private function validaQuantiaDeLancesUsuario(Lance $lance):bool{
+    private function validaQuantiaDeLancesUsuario(Usuario $usuario):bool{
       /** @var int $totalLances */
       $totalLances = 0;
 
       foreach ($this->lances as $lanceAtual) {
-        if($lanceAtual->getUsuario() == $lance->getUsuario())
+        if($lanceAtual->getUsuario() == $usuario)
           $totalLances++;
       }
       return $totalLances < 5;
@@ -93,6 +93,36 @@
       */
     public function getLances():array{
       return $this->lances;
+    }
+
+    public function dobraLance(Usuario $usuario){
+      $ultimoLanceDoUsuario = null;
+      foreach ($this->lances as $lance) {
+        if($lance->getUsuario() == $usuario)
+          $ultimoLanceDoUsuario = $lance;
+      }
+      if ($this->validaDobraDeLance(
+        $usuario,
+        $ultimoLanceDoUsuario)
+      ) {
+        $this->lances[] = new Lance(
+          $usuario,
+          ($ultimoLanceDoUsuario->getValor() * 2)
+        );
+      }
+      return $this;
+    }
+
+    public function validaDobraDeLance(
+      Usuario $usuario,
+      $ultimoLanceDoUsuario
+    ):bool{
+      if(\count($this->getLances()) == 0) return false;
+      return $this->verificaLancesSequenciaisUsuario($usuario) &&
+             (
+               $this->validaQuantiaDeLancesUsuario($usuario) &&
+               $ultimoLanceDoUsuario != null
+             );
     }
   }
  ?>
