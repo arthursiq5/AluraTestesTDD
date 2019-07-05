@@ -28,7 +28,9 @@
       * @return Leilao
       */
     public function propoe(Lance $lance):Leilao{
-      $this->lances[] = $lance;
+      if ((\count($this->getLances()) == 0) ||
+          (end($this->lances)->getUsuario() != $lance->getUsuario()))
+        $this->lances[] = $lance;
       return $this;
     }
 
