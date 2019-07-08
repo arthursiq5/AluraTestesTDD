@@ -12,12 +12,18 @@
     private $avaliador;
 
     /**
+      * @access public
+      * @return void
+      */
+    public function SetUp():void{
+      $this->avaliador = new Avaliador();
+    }
+    /**
       * @access private
       * @param Leilao $leilao
       * @return void
       */
     private function criaAvaliador(Leilao $leilao):void{
-      $this->avaliador = new Avaliador();
       $this->avaliador->avalia($leilao);
     }
     /**
