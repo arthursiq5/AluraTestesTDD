@@ -1,7 +1,7 @@
 <?php
-  require_once './Usuario.php';
-  require_once './Lance.php';
-  require_once './Leilao.php';
+  require_once "{dirname(__FILE__)}/../Usuario.php";
+  require_once "{dirname(__FILE__)}/../Lance.php";
+  require_once "{dirname(__FILE__)}/../Leilao.php";
 
   class LeilaoFactory{
 

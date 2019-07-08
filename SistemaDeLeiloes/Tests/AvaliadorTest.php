@@ -5,7 +5,7 @@
   require_once "{dirname(__FILE__)}/../Lance.php";
   require_once "{dirname(__FILE__)}/../Leilao.php";
   require_once "{dirname(__FILE__)}/../Avaliador.php";
-  require_once "{dirname(__FILE__)}/../LeilaoFactory.php";
+  require_once "{dirname(__FILE__)}/../Factories/LeilaoFactory.php";
 
   /**
     * teste automatizado baseado no PHPUnit
@@ -31,6 +31,11 @@
     private function criaAvaliador(Leilao $leilao):void{
       $this->avaliador->avalia($leilao);
     }
+
+    public function tearDown(){
+      var_dump('fim');
+    }
+
     /**
       * teste automatizado utilizando phpunit
       */
@@ -55,6 +60,7 @@
 
       $this->assertEquals($menorEsperado, $this->avaliador->getMenorLance());
     }
+
     public function testCalculaMedia(){
       $mediaEsperada = 333.33;
 
@@ -134,6 +140,7 @@
       $this->assertEquals($menor, $this->avaliador->getMenorLance());
       $this->assertEquals($maior, $this->avaliador->getMaiorLance());
     }
+
     public function testPegaTresMaiores(){
       $leilao = new Leilao('PlayStation 4');
 
@@ -191,6 +198,7 @@
         ->getValor()
       );
     }
+
     public function testPegaDoisUnicos(){
       // $leilao = new Leilao('PlayStation 4');
 
@@ -216,6 +224,7 @@
         ->getValor()
       );
     }
+
     public function testPegaNulos(){
       $leilao = new Leilao('PlayStation 4');
 
