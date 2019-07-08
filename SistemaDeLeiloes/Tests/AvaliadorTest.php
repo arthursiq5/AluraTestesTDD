@@ -11,14 +11,17 @@
     * teste automatizado baseado no PHPUnit
     */
   class AvaliadorTest extends TestCase{
+    /** @var Avaliador $avaliador */
     private $avaliador;
-
+    /** @var LeilaoFactory $leilaoFactory */
+    private $leilaoFactory;
     /**
       * @access public
       * @return void
       */
     public function SetUp():void{
       $this->avaliador = new Avaliador();
+      $this->leilaoFactory = new LeilaoFactory();
     }
     /**
       * @access private
@@ -189,14 +192,18 @@
       );
     }
     public function testPegaDoisUnicos(){
-      $leilao = new Leilao('PlayStation 4');
+      // $leilao = new Leilao('PlayStation 4');
 
       $caio   = new Usuario('Caio');
       $felipe = new Usuario('Felipe');
 
-      $leilao->propoe(new Lance($felipe, 200))
-             ->propoe(new Lance($caio,   350));
-
+      // $leilao->propoe(new Lance($felipe, 200))
+      //        ->propoe(new Lance($caio,   350));
+      $leilao = $this->leilaoFactory
+                     ->para('Playstation 4')
+                     ->lance($felipe, 200)
+                     ->lance($caio,   350)
+                     ->constroi();
       $this->criaAvaliador($leilao);
 
       $this->assertEquals(2, count($this->avaliador->getMaioresValores()));
