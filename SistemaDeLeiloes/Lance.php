@@ -16,6 +16,9 @@
       * @return void
       */
     function __construct(Usuario $usuario, float $valor){
+      if (($valor <= 0) || ($valor == null)) {
+        throw new InvalidArgumentException("Lances não podem ser nulos ou negativos");
+      }
       $this->usuario = $usuario;
       $this->valor = $valor;
     }
