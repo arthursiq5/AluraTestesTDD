@@ -32,10 +32,6 @@
       $this->avaliador->avalia($leilao);
     }
 
-    public function tearDown(){
-      var_dump('fim');
-    }
-
     /**
       * teste automatizado utilizando phpunit
       */
@@ -225,14 +221,14 @@
       );
     }
 
-    public function testPegaNulos(){
-      $leilao = new Leilao('PlayStation 4');
-
+    /**
+      * @expectedException InvalidArgumentException
+      */
+    public function testDeveRecusarLeiloesSemLances(){
+      $leilao = $this->leilaoFactory
+                     ->para('PlayStation 4')
+                     ->constroi();
       $this->criaAvaliador($leilao);
-
-      $this->assertEquals(null, count($this->avaliador->getMaioresValores()));
-
-
     }
   }
  ?>

@@ -12,7 +12,7 @@
       * @param string $descricao
       * @return LeilaoFactory $this
       */
-    public function para($descricao):LeilaoFactory{
+    public function para(string $descricao):LeilaoFactory{
       $this->leilao = new Leilao($descricao);
 
       return $this;

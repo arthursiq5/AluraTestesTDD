@@ -39,6 +39,10 @@
       * @return Avaliador $this
       */
     public function avalia(Leilao $leilao):Avaliador{
+      if(\count($leilao->getLances()) == 0){
+        throw new \InvalidArgumentException("Um leilão precisa de ao menos um lance");
+      }
+
       foreach($leilao->getLances() as $lance){
         if($lance->getValor() > $this->maiorValor)
           $this->maiorValor = $lance->getValor();
