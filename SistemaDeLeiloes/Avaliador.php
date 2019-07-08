@@ -36,6 +36,7 @@
     /**
       * avalia leilão
       * @param Leilao $leilao
+      * @throws InvalidArgumentException exceção para leilão sem lances 
       * @return Avaliador $this
       */
     public function avalia(Leilao $leilao):Avaliador{
