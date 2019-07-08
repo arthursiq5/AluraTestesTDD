@@ -5,7 +5,7 @@
   require_once "{dirname(__FILE__)}/../Lance.php";
   require_once "{dirname(__FILE__)}/../Leilao.php";
   require_once "{dirname(__FILE__)}/../Avaliador.php";
-  require_once "{dirname(__FILE__)}/../ConstrutorDeLeilao.php";
+  require_once "{dirname(__FILE__)}/../LeilaoFactory.php";
 
   /**
     * teste automatizado baseado no PHPUnit

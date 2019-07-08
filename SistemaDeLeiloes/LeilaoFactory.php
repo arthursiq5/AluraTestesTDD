@@ -3,7 +3,7 @@
   require_once './Lance.php';
   require_once './Leilao.php';
 
-  class ConstrutorDeLeilao{
+  class LeilaoFactory{
 
     private $leilao;
 
