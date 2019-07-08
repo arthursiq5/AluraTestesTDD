@@ -9,6 +9,17 @@
     * teste automatizado baseado no PHPUnit
     */
   class AvaliadorTest extends TestCase{
+    private $avaliador;
+
+    /**
+      * @access private
+      * @param Leilao $leilao
+      * @return void
+      */
+    private function criaAvaliador(Leilao $leilao):void{
+      $this->avaliador = new Avaliador();
+      $this->avaliador->avalia($leilao);
+    }
     /**
       * teste automatizado utilizando phpunit
       */
@@ -27,12 +38,11 @@
              ->propoe(new Lance($felipe, 200))
              ->propoe(new Lance($renan,  100));
 
-      $leiloeiro = new Avaliador();
-      $leiloeiro->avalia($leilao);
+      $this->criaAvaliador($leilao);
 
-      $this->assertEquals($maiorEsperado, $leiloeiro->getMaiorLance(), 1);
+      $this->assertEquals($maiorEsperado, $this->avaliador->getMaiorLance(), 1);
 
-      $this->assertEquals($menorEsperado, $leiloeiro->getMenorLance());
+      $this->assertEquals($menorEsperado, $this->avaliador->getMenorLance());
     }
     public function testCalculaMedia(){
       $mediaEsperada = 333.33;
@@ -47,10 +57,9 @@
              ->propoe(new Lance($caio,   350))
              ->propoe(new Lance($felipe, 250));
 
-      $leiloeiro = new Avaliador();
-      $leiloeiro->avalia($leilao);
+      $this->criaAvaliador($leilao);
 
-      $this->assertEquals($mediaEsperada, $leiloeiro->getMedia());
+      $this->assertEquals($mediaEsperada, $this->avaliador->getMedia());
 
     }
 
@@ -68,13 +77,12 @@
              ->propoe(new Lance($caio,   350))
              ->propoe(new Lance($renan,  400));
 
-      $leiloeiro = new Avaliador();
-      $leiloeiro->avalia($leilao);
+      $this->criaAvaliador($leilao);
 
-      $this->assertEquals($maiorEsperado, $leiloeiro->getMaiorLance(), 1);
+      $this->assertEquals($maiorEsperado, $this->avaliador->getMaiorLance(), 1);
 
 
-      $this->assertEquals($menorEsperado, $leiloeiro->getMenorLance());
+      $this->assertEquals($menorEsperado, $this->avaliador->getMenorLance());
     }
 
     public function testAceitaLancesOrdemAleatoria(){
@@ -94,12 +102,11 @@
              ->propoe(new Lance($felipe, 350));
 
 
-      $leiloeiro = new Avaliador();
-      $leiloeiro->avalia($leilao);
+      $this->criaAvaliador($leilao);
 
-      $this->assertEquals($maiorEsperado, $leiloeiro->getMaiorLance(), 1);
+      $this->assertEquals($maiorEsperado, $this->avaliador->getMaiorLance(), 1);
 
-      $this->assertEquals($menorEsperado, $leiloeiro->getMenorLance());
+      $this->assertEquals($menorEsperado, $this->avaliador->getMenorLance());
     }
 
     public function testAceitaLanceUnico(){
@@ -108,14 +115,13 @@
       $renan = new Usuario('Renan');
       $leilao->propoe(new Lance($renan, 10));
 
-      $leiloeiro = new Avaliador();
-      $leiloeiro->avalia($leilao);
+      $this->criaAvaliador($leilao);
 
       $menor = 10;
       $maior = 10;
 
-      $this->assertEquals($menor, $leiloeiro->getMenorLance());
-      $this->assertEquals($maior, $leiloeiro->getMaiorLance());
+      $this->assertEquals($menor, $this->avaliador->getMenorLance());
+      $this->assertEquals($maior, $this->avaliador->getMaiorLance());
     }
     public function testPegaTresMaiores(){
       $leilao = new Leilao('PlayStation 4');
@@ -128,19 +134,18 @@
              ->propoe(new Lance($felipe, 400))
              ->propoe(new Lance($caio,   500));
 
-      $leiloeiro = new Avaliador();
-      $leiloeiro->avalia($leilao);
+      $this->criaAvaliador($leilao);
 
-      $this->assertEquals(3, count($leiloeiro->getMaioresValores()));
-      $this->assertEquals(500, $leiloeiro
+      $this->assertEquals(3, count($this->avaliador->getMaioresValores()));
+      $this->assertEquals(500, $this->avaliador
         ->getMaioresValores()[0]
         ->getValor()
       );
-      $this->assertEquals(400, $leiloeiro
+      $this->assertEquals(400, $this->avaliador
         ->getMaioresValores()[1]
         ->getValor()
       );
-      $this->assertEquals(350, $leiloeiro
+      $this->assertEquals(350, $this->avaliador
         ->getMaioresValores()[2]
         ->getValor()
       );
@@ -159,19 +164,18 @@
              ->propoe(new Lance($felipe, 600))
              ->propoe(new Lance($caio,   700));
 
-      $leiloeiro = new Avaliador();
-      $leiloeiro->avalia($leilao);
+      $this->criaAvaliador($leilao);
 
-      $this->assertEquals(3, count($leiloeiro->getMaioresValores()));
-      $this->assertEquals(700, $leiloeiro
+      $this->assertEquals(3, count($this->avaliador->getMaioresValores()));
+      $this->assertEquals(700, $this->avaliador
              ->getMaioresValores()[0]
              ->getValor()
         );
-      $this->assertEquals(600, $leiloeiro
+      $this->assertEquals(600, $this->avaliador
         ->getMaioresValores()[1]
         ->getValor()
       );
-      $this->assertEquals(500, $leiloeiro
+      $this->assertEquals(500, $this->avaliador
         ->getMaioresValores()[2]
         ->getValor()
       );
@@ -185,15 +189,14 @@
       $leilao->propoe(new Lance($felipe, 200))
              ->propoe(new Lance($caio,   350));
 
-      $leiloeiro = new Avaliador();
-      $leiloeiro->avalia($leilao);
+      $this->criaAvaliador($leilao);
 
-      $this->assertEquals(2, count($leiloeiro->getMaioresValores()));
-      $this->assertEquals(350, $leiloeiro
+      $this->assertEquals(2, count($this->avaliador->getMaioresValores()));
+      $this->assertEquals(350, $this->avaliador
         ->getMaioresValores()[0]
         ->getValor()
       );
-      $this->assertEquals(200, $leiloeiro
+      $this->assertEquals(200, $this->avaliador
         ->getMaioresValores()[1]
         ->getValor()
       );
@@ -201,10 +204,9 @@
     public function testPegaNulos(){
       $leilao = new Leilao('PlayStation 4');
 
-      $leiloeiro = new Avaliador();
-      $leiloeiro->avalia($leilao);
+      $this->criaAvaliador($leilao);
 
-      $this->assertEquals(null, count($leiloeiro->getMaioresValores()));
+      $this->assertEquals(null, count($this->avaliador->getMaioresValores()));
 
 
     }
