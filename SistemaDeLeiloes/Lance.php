@@ -11,8 +11,9 @@
     private $valor;
 
     /**
-      * @param Usuario $usuario
-      * @param float $valor
+      * @param  Usuario $usuario
+      * @throws InvalidArgumentException exceção para lances nulos ou negativos
+      * @param  float $valor
       * @return void
       */
     function __construct(Usuario $usuario, float $valor){
