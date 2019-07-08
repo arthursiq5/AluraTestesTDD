@@ -10,9 +10,9 @@
     /**
       * @access public
       * @param string $descricao
-      * @return ConstrutorDeLeilao $this
+      * @return LeilaoFactory $this
       */
-    public function para($descricao):ConstrutorDeLeilao{
+    public function para($descricao):LeilaoFactory{
       $this->leilao = new Leilao($descricao);
 
       return $this;
@@ -23,9 +23,9 @@
       * @access public
       * @param Usuario $usuario
       * @param float $valor
-      * @return ConstrutorDeLeilao $this
+      * @return LeilaoFactory $this
       */
-    public function lance(Usuario $usuario, float $valor):ConstrutorDeLeilao{
+    public function lance(Usuario $usuario, float $valor):LeilaoFactory{
       $this->leilao->propoe(new Lance($usuario, $valor));
       return $this;
     }
